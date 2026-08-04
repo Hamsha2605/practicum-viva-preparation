@@ -157,11 +157,13 @@ approximation.
 
 ### Slide 10 — Attention example (~55s)
 
-Attention, same case. This is the weight the model's own attention layers put on each
-position, averaged over heads and layers. The dashed line is what uniform attention
-would look like if the model wasn't focusing on anything in particular. What jumps out
-are three clear spikes, all on clone calls, process creation events, sitting well
-above that baseline, three to four times the uniform share.
+"Same trace, different lens. This time we're not removing anything — we're reading the weight the model's own attention layers put on each position, averaged across heads and layers.
+
+The dashed line is our baseline: what uniform attention looks like if the model isn't focusing on anything in particular.
+
+Three clear spikes rise above that line — all clone calls, process creation events — three to four times the uniform share.
+
+And here's the key part: we didn't run any extra procedure to get this. It's already sitting inside the model's forward pass. That's exactly why attention is cheap — which matters in a minute when we get to cost."
 
 The advantage here is we're not running any extra procedure to get this, it's already
 sitting inside the model's forward pass. That's also exactly why it's cheap, which
